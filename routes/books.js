@@ -9,9 +9,9 @@ const upload = multer({ dest: 'uploads/' });
 
 // ➕ Add Single Book
 router.post('/add', (req, res) => {
-  const { title, author} = req.body;
+  const { title, author,published_date} = req.body;
   const sql = 'INSERT INTO books (title, author, published_date) VALUES (?, ?, NOW())';
-  db.query(sql, [title, author], (err) => {
+  db.query(sql, [title, author,published_date], (err) => {
     if (err) return res.status(500).send('Database Error');
     res.send('Book added successfully');
   });
