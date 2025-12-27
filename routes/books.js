@@ -5,19 +5,25 @@ const multer = require('multer');
 const csv = require('csv-parser');
 const fs = require('fs');
 
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: '/tmp' });
 
-// ➕ Add Single Book
+// Add Single Book
 router.post('/add', (req, res) => {
   const { title, author,published_date} = req.body;
-  const sql = 'INSERT INTO books (title, author, published_date) VALUES (?, ?, NOW())';
+  if(!title||!author||!published_date){
+    return res.status(400).send('All fields are required')
+  }
+  const sql = 'INSERT INTO books (title, author, published_date) VALUES (?, ?,?)';
   db.query(sql, [title, author,published_date], (err) => {
-    if (err) return res.status(500).send('Database Error');
+    if (err){
+      console.error(err);
+      return res.status(500).send('Database Error');
+    }
     res.send('Book added successfully');
   });
 });
 
-// 📤 Upload CSV File
+// Upload CSV File
 router.post('/upload', upload.single('csvFile'), (req, res) => {
   const filePath = req.file.path;
   const books = [];
@@ -44,7 +50,7 @@ router.post('/upload', upload.single('csvFile'), (req, res) => {
     });
 });
 
-// 📖 Read All Books
+// Read All Books
 router.get('/list', (req, res) => {
   db.query('SELECT * FROM books', (err, results) => {
     if (err) return res.status(500).send('Database Error');
@@ -52,7 +58,7 @@ router.get('/list', (req, res) => {
   });
 });
 
-// ✏️ Update Book
+// Update Book
 router.put('/update/:id', (req, res) => {
   const { title, author, published_date } = req.body;
   const sql = 'UPDATE books SET title=?, author=?, published_date=? WHERE id=?';
@@ -62,7 +68,7 @@ router.put('/update/:id', (req, res) => {
   });
 });
 
-// ❌ Delete Book
+// Delete Book
 router.delete('/delete/:id', (req, res) => {
   const sql = 'DELETE FROM books WHERE id=?';
   db.query(sql, [req.params.id], (err) => {
