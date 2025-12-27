@@ -1,5 +1,5 @@
-const API_URL = "http://localhost:5000/books";
-
+// const API_URL = "http://localhost:5000/books";
+const API_URL="/books";
 function addBook() {
   const title = document.getElementById("title").value;
   const author = document.getElementById("author").value;
