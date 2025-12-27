@@ -1,57 +1,141 @@
+/* Global styles */
 body {
   font-family: Arial, sans-serif;
-  background: #f5f6fa;
+  margin: 0;
+  min-height: 100vh;
+
+  /* Background image with shadow overlay */
+  background: 
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Main container */
+.container {
+  width: 80%;
+  max-width: 900px;
+  margin: 40px auto;
+  background: rgba(255,255,255,0.75);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
   text-align: center;
-  margin: 40px;
+  width: 70%;
+  margin: 60px auto;
+  padding: 40px;
+
+  /* Background image with dark shadow overlay */
+  background-image:
+    linear-gradient(
+      rgba(135, 130, 130, 0.92),
+      rgba(235, 224, 224, 0.92)
+    ),
+    url("https://images.unsplash.com/photo-1512820790803-83ca734da794");
+
+  background-size: cover;
+  background-position: center;
+
+  border-radius: 12px;
+
+  /* Shadow */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+  
 }
 
+/* Headings */
 h1, h2 {
-  color: #333;
+  color: #2c3e50;
+  margin-bottom: 20px;
 }
 
+/* Menu buttons (Home page) */
 .menu {
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 .menu a {
   display: block;
-  margin: 10px auto;
-  width: 200px;
+  margin: 12px auto;
+  width: 220px;
   text-decoration: none;
   padding: 12px;
   background: #3498db;
   color: white;
-  border-radius: 6px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: 0.3s;
 }
 
 .menu a:hover {
-  background: #b7db32;
+  background: #2c80b4;
 }
 
-input, button {
+/* Forms */
+form {
+  margin-top: 20px;
+}
+
+input {
   padding: 10px;
-  margin: 5px;
+  margin: 8px;
   width: 250px;
   border-radius: 4px;
+  border: 1px solid #ccc;
 }
 
+/* Buttons */
 button {
+  padding: 10px;
+  width: 200px;
+  margin-top: 10px;
   background: #27ae60;
   color: white;
   border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 button:hover {
   background: #1e8449;
 }
 
+/* Tables (Read Books page) */
 table {
-  margin: 20px auto;
+  margin: 30px auto;
   border-collapse: collapse;
-  width: 80%;
+  width: 100%;
 }
 
-td, th {
+th {
+  background: #3498db;
+  color: white;
+  padding: 10px;
+}
+
+td {
   border: 1px solid #ccc;
   padding: 8px;
+}
+
+/* Back link */
+a.back {
+  display: inline-block;
+  margin-top: 20px;
+  color: #3498db;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a.back:hover {
+  text-decoration: underline;
 }

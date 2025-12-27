@@ -11,7 +11,7 @@ function addBook() {
     body: JSON.stringify({ title, author, published_date })
   })
     .then(res => res.text())
-    .then(alert);
+    .then(alert);    
 }
 
 function uploadCSV() {
@@ -31,12 +31,47 @@ function loadBooks() {
     .then(res => res.json())
     .then(data => {
       let html = "<tr><th>ID</th><th>Title</th><th>Author</th><th>Published Date</th></tr>";
+
       data.forEach(book => {
-        html += `<tr><td>${book.id}</td><td>${book.title}</td><td>${book.author}</td><td>${book.published_date}</td></tr>`;
+        const dateObj = new Date(book.published_date);
+
+        const formattedDate = dateObj.toLocaleString('en-IN', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: true
+        });
+
+        html += `
+          <tr>
+            <td>${book.id}</td>
+            <td>${book.title}</td>
+            <td>${book.author}</td>
+            <td>${formattedDate}</td>
+          </tr>
+        `;
       });
+
       document.getElementById("bookTable").innerHTML = html;
     });
 }
+
+
+// function loadBooks() {
+//   fetch(`${API_URL}/list`)
+//     .then(res => res.json())
+//     .then(data => {
+//       let html = "<tr><th>ID</th><th>Title</th><th>Author</th><th>Published Date</th></tr>";
+//       data.forEach(book => {
+//         const formattedDate=new Date(book.published_date).toLocaleString();
+//         html += `<tr><td>${book.id}</td><td>${book.title}</td><td>${book.author}</td><td>${formattedDate}</td></tr>`;
+//       });
+//       document.getElementById("bookTable").innerHTML = html;
+//     });
+// }
 
 function updateBook() {
   const id = document.getElementById("id").value;
