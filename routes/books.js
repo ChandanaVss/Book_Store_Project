@@ -10,11 +10,11 @@ const upload = multer({ dest: '/tmp' });
 // Add Single Book
 router.post('/add', (req, res) => {
   const { title, author,published_date} = req.body;
-  if(!title||!author||!published_date){
+  if(!title||!author){
     return res.status(400).send('All fields are required')
   }
-  const sql = 'INSERT INTO books (title, author, published_date) VALUES (?, ?,?)';
-  db.query(sql, [title, author,published_date], (err) => {
+  const sql = 'INSERT INTO books (title, author, published_date) VALUES (?, ?,NOW())';
+  db.query(sql, [title, author], (err) => {
     if (err){
       console.error(err);
       return res.status(500).send('Database Error');
@@ -31,8 +31,8 @@ router.post('/upload', upload.single('csvFile'), (req, res) => {
   fs.createReadStream(filePath)
     .pipe(csv())
     .on('data', (row) => {
-      if (row.title && row.author && row.published_date) {
-        books.push([row.title, row.author, row.published_date]);
+      if (row.title && row.author) {
+        books.push([row.title, row.author]);
       }
     })
     .on('end', () => {
@@ -40,9 +40,9 @@ router.post('/upload', upload.single('csvFile'), (req, res) => {
         fs.unlinkSync(filePath);
         return res.status(400).send('No valid data found in CSV.');
       }
-
+      const booksWithDate = books.map(b => [...b, new Date()]);
       const sql = 'INSERT INTO books (title, author, published_date) VALUES ?';
-      db.query(sql, [books], (err) => {
+      db.query(sql, [booksWithDate], (err) => {
         fs.unlinkSync(filePath);
         if (err) return res.status(500).send('Database Error');
         res.send('CSV data uploaded successfully');
