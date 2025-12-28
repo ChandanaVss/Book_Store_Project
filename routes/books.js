@@ -16,8 +16,8 @@ router.post('/add', (req, res) => {
   const sql = 'INSERT INTO books (title, author, published_date) VALUES (?, ?,NOW())';
   db.query(sql, [title, author], (err) => {
     if (err){
-      console.error(err);
-      return res.status(500).send('Database Error');
+      console.error('ADD ERROR:',err);
+      return res.status(500).json(err);
     }
     res.send('Book added successfully');
   });
