@@ -1,19 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <title>Book Home</title>
+  <title>Admin Signup</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <div class="container">
-  <h1>Book Store Management</h1>
-  <div class="menu">
-    <a href="add.html">Add Book</a>
-    <a href="read.html">Read Books</a>
-    <a href="update.html"> Update Book</a>
-    <a href="delete.html"> Delete Book</a>
+
+  <nav class="navbar">
+    <span class="project-name">Book Store Management</span>
+  </nav>
+
+  <div class="auth-container">
+    <h2>Admin Signup</h2>
+    <br><br>
+
+    <input id="username" placeholder="Username">
+    <br><br>
+    <input id="password" type="password" placeholder="Password">
+    <br><br>
+
+    <button onclick="adminSignup()">Sign Up</button>
+    <br><br><br>
+
+    <p>Already registered?
+      <a href="admin-login.html">Login</a>
+    </p>
   </div>
-  </div>
+
+  <script src="script.js"></script>
 </body>
+
 </html>

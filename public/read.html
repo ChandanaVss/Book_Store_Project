@@ -1,17 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Read Books</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+  <!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-left">
+    <span class="project-name">Book Store Management</span>
+  </div>
+
+  <div class="nav-right">
+    <a href="admin-signup.html" id="signupLink">Signup</a>
+    <a href="admin-login.html" id="loginLink">Login</a>
+    <button id="logoutBtn" onclick="logout()">Logout</button>
+  </div>
+</nav>
   <div class="container">
-  <h2>All Books in Library</h2>
-  <table id="bookTable"></table>
-  <p><a href="index.html" class="back"> Back to Home</a></p>
+     <div style="margin-bottom: 10px;">
+      <button onclick="loadBooks()">Click Here To Refresh</button>
+    </div>
+    <input type="text" id="searchInput" placeholder="Search by title or author">
+    <br><br><br>
+    <button onclick="searchBooks()">Search</button>
+    <br><br><br><br>
+    <h2>All Books in Library</h2>
+    <table><tbody id="bookTable"></tbody></table>
+    <p><a href="./dashboard.html" class="back">Back to Home</a></p>
+  </div>
   <script src="script.js"></script>
   <script>loadBooks();</script>
-  </div>
+  <script>
+  updateNavbar();
+</script>
 </body>
+
 </html>

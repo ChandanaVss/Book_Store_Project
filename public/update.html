@@ -6,6 +6,17 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <nav class="navbar">
+  <div class="nav-left">
+    <span class="project-name">Book Store Management</span>
+  </div>
+
+  <div class="nav-right">
+    <a href="admin-signup.html" id="signupLink">Signup</a>
+    <a href="admin-login.html" id="loginLink">Login</a>
+    <button id="logoutBtn" onclick="logout()">Logout</button>
+  </div>
+</nav>
   <div class="container">
   <h2>Update Book Details</h2>
 
@@ -15,8 +26,12 @@
   <input id="published_date" type="date">
   <button onclick="updateBook()">Update</button>
 
-  <p><a href="index.html" class="back">Back to Home</a></p>
-  <script src="script.js"></script>
+  <p><a href="./dashboard.html" class="back">Back to Home</a></p>
   </div>
+  <script src="script.js"></script>
+  <script>checkAdmin();</script>
+  <script>
+  updateNavbar();
+</script>
 </body>
 </html>

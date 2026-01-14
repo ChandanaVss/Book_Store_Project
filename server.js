@@ -1,16 +1,28 @@
-require('dotenv').config();
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const booksRoute = require('./routes/books');
+const express = require("express");
+const path = require("path");
+require("dotenv").config();
 
 const app = express();
-app.use(cors());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(bodyParser.json());
-app.use(express.static('public'));
-app.use('/books', booksRoute);
 
-const PORT =process.env.PORT||5000;
-app.listen(PORT, () => console.log(` Server running at http://localhost:${PORT}`));
+// middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// serve frontend
+app.use(express.static(path.join(__dirname, "public")));
+
+// routes
+app.use("/books", require("./routes/books"));
+app.use("/admin", require("./routes/admin"));
+
+// test route
+app.get("/test", (req, res) => {
+  res.json({ message: "Server working" });
+});
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log(`Open your project here 👉 http://localhost:${PORT}/index.html`);
+});
